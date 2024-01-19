@@ -55,7 +55,7 @@ const userLogin = async (req, res) => {
       secret
     );
 
-    return res.status(200).json({ msg: "Autenticate " + token });
+    return res.status(200).json({ token });
   } catch (error) {
     return res.status(500).json({ msg: "Something wrong " + error });
   }
