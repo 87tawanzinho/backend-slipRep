@@ -51,7 +51,13 @@ const userLogin = async (req, res) => {
     const secret = process.env.ULTRA_SECRET_TOKEN;
 
     const token = jwt.sign(
-      { id: user._id, name: user.name, email: user.email },
+      {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        mensalIncomeBills: user.mensalIncomeBills,
+        mensalIncomeTickets: user.mensalIncomeTickets,
+      },
       secret
     );
 
@@ -61,7 +67,34 @@ const userLogin = async (req, res) => {
   }
 };
 
+const newIncomeBills = async (req, res) => {
+  const { name, mensalIncomeBills } = req.body;
+
+  const user = await UserModel.findOne({ name: name });
+
+  if (!user) {
+    return res.status(400).json({ msg: "user not found" });
+  }
+
+  await user.updateOne({ mensalIncomeBills: mensalIncomeBills });
+  return res.status(201).json({ msg: "Mensal Incomes updated" });
+};
+
+const newIncomeTickets = async (req, res) => {
+  const { name, mensalIncomeTickets } = req.body;
+
+  const user = await UserModel.findOne({ name: name });
+
+  if (!user) {
+    return res.status(400).json({ msg: "user not found" });
+  }
+
+  await user.updateOne({ mensalIncomeTickets: mensalIncomeTickets });
+  return res.status(201).json({ msg: "Mensal Incomes updated" });
+};
 module.exports = {
   userCreate,
   userLogin,
+  newIncomeBills,
+  newIncomeTickets,
 };

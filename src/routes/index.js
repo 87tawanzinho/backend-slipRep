@@ -1,4 +1,9 @@
-const { userCreate, userLogin } = require("../controllers/userController");
+const {
+  userCreate,
+  userLogin,
+  newIncomeBills,
+  newIncomeTickets,
+} = require("../controllers/userController");
 const UserModel = require("../model/User");
 const router = require("express").Router();
 
@@ -9,5 +14,7 @@ router.get("/", async (req, res) => {
 
 router.post("/", userCreate);
 router.post("/login", userLogin);
+router.put("/newIncomeBills", newIncomeBills);
+router.put("/newIncomeTickets", newIncomeTickets);
 
 module.exports = router;
