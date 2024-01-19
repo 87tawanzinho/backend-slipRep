@@ -1,4 +1,4 @@
-const { userCreate } = require("../controllers/userController");
+const { userCreate, userLogin } = require("../controllers/userController");
 const UserModel = require("../model/User");
 const router = require("express").Router();
 
@@ -8,5 +8,6 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", userCreate);
+router.post("/login", userLogin);
 
 module.exports = router;

@@ -6,11 +6,20 @@ const userSchema = new Schema({
   name: String,
   email: String,
   password: String,
+
+  bills: [
+    {
+      name: String,
+      price: String,
+    },
+  ],
+
   tickets: [
     {
       name: String,
       code: String,
       date: String,
+      price: String,
     },
   ],
 });
