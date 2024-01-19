@@ -1,3 +1,4 @@
+const { newBills } = require("../controllers/ticketsAndBills");
 const {
   userCreate,
   userLogin,
@@ -16,5 +17,5 @@ router.post("/", userCreate);
 router.post("/login", userLogin);
 router.put("/newIncomeBills", newIncomeBills);
 router.put("/newIncomeTickets", newIncomeTickets);
-
+router.put("/newBill", newBills);
 module.exports = router;
