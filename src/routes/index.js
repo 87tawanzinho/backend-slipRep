@@ -2,6 +2,7 @@ const {
   newBills,
   showBills,
   deleteOneBill,
+  showBillById,
 } = require("../controllers/ticketsAndBills");
 const {
   userCreate,
@@ -23,5 +24,6 @@ router.put("/newIncomeBills", newIncomeBills);
 router.put("/newIncomeTickets", newIncomeTickets);
 router.put("/newBill", newBills);
 router.get("/showBills/:name", showBills);
+router.get("/showBillById/:name/:id", showBillById);
 router.put("/deleteOneBill/:userName", deleteOneBill);
 module.exports = router;

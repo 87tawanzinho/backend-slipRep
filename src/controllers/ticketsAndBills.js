@@ -24,6 +24,17 @@ const showBills = async (req, res) => {
 
   return res.status(200).json({ bills: allBills });
 };
+
+const showBillById = async (req, res) => {
+  const { name, id } = req.params;
+
+  const userExist = await UserModel.findOne({ name: name });
+
+  const bill = userExist.bills.filter((bill) => bill._id.toString() === id);
+
+  return res.status(200).json({ bill });
+};
+
 const deleteOneBill = async (req, res) => {
   const { userName } = req.params;
   const { id } = req.body;
@@ -48,4 +59,4 @@ const deleteOneBill = async (req, res) => {
   }
 };
 
-module.exports = { newBills, showBills, deleteOneBill };
+module.exports = { newBills, showBills, showBillById, deleteOneBill };
