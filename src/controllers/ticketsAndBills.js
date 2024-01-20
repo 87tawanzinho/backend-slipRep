@@ -11,7 +11,7 @@ const newBills = async (req, res) => {
     await userExist.save();
     return res.status(200).json({ msg: "New bill added successfully" });
   } catch (error) {
-    return res.status(500).json(error);
+    return res.status(500).json({ msg: "Something wrong " + error });
   }
 };
 
