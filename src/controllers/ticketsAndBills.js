@@ -24,17 +24,28 @@ const showBills = async (req, res) => {
 
   return res.status(200).json({ bills: allBills });
 };
-
 const deleteOneBill = async (req, res) => {
   const { userName } = req.params;
   const { id } = req.body;
-  const userExist = await UserModel.findOne({ name: userName });
 
-  await UserModel.updateOne(
-    { name: userName },
-    { $pull: { bills: { _id: id } } }
-  );
+  try {
+    const userExist = await UserModel.findOne({ name: userName });
 
-  return res.status(200).json({ bills: userExist.bills });
+    if (!userExist) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    userExist.bills = userExist.bills.filter(
+      (bill) => bill._id.toString() !== id
+    );
+
+    await userExist.save();
+
+    return res.status(200).json({ bills: userExist.bills });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
 };
+
 module.exports = { newBills, showBills, deleteOneBill };
