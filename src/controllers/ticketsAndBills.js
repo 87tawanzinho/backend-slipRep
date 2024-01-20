@@ -11,4 +11,13 @@ const newBills = async (req, res) => {
   return res.status(200).json({ msg: "New bill added successfully" });
 };
 
-module.exports = { newBills };
+const showBills = async (req, res) => {
+  const { name } = req.params;
+
+  const userExist = await UserModel.findOne({ name: name });
+
+  const allBills = userExist.bills;
+
+  return res.status(200).json({ bills: allBills });
+};
+module.exports = { newBills, showBills };
