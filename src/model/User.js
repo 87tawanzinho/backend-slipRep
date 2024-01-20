@@ -12,7 +12,7 @@ const userSchema = new Schema({
     {
       name: String,
       price: Number,
-      data: String,
+      date: String,
     },
   ],
 
