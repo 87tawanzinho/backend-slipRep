@@ -16,6 +16,7 @@ const userSchema = new Schema({
       name: String,
       price: Number,
       date: String,
+      observation: String,
     },
   ],
 
