@@ -2,11 +2,11 @@ const UserModel = require("../model/User");
 const bcrypt = require("bcrypt");
 
 const newBills = async (req, res) => {
-  const { userName, name, price } = req.body;
+  const { userName, name, price, date } = req.body;
 
   try {
     const userExist = await UserModel.findOne({ name: userName });
-    const newBill = { name, price };
+    const newBill = { name, price, date };
     await userExist.bills.push(newBill);
     await userExist.save();
     return res.status(200).json({ msg: "New bill added successfully" });
