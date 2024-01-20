@@ -30,8 +30,7 @@ const deleteOneBill = async (req, res) => {
   const { id } = req.body;
   const userExist = await UserModel.findOne({ name: userName });
 
-  userExist.bills.filter((bill) => bill._id !== id);
-
+  userExist.bills.pull({ _id: id });
   await userExist.save();
 
   return res.status(200).json({ bills: userExist.bills });
