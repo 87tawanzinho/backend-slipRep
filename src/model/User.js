@@ -6,7 +6,10 @@ const userSchema = new Schema({
   name: String,
   email: String,
   password: String,
-  mensalIncomeBills: Number,
+  mensalIncomeBills: {
+    type: String,
+    default: 0,
+  },
   mensalIncomeTickets: Number,
   bills: [
     {
