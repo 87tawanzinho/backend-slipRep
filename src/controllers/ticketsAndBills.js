@@ -4,11 +4,15 @@ const bcrypt = require("bcrypt");
 const newBills = async (req, res) => {
   const { userName, name, price } = req.body;
 
-  const userExist = await UserModel.findOne({ name: userName });
-  const newBill = { name, price };
-  await userExist.bills.push(newBill);
-  await userExist.save();
-  return res.status(200).json({ msg: "New bill added successfully" });
+  try {
+    const userExist = await UserModel.findOne({ name: userName });
+    const newBill = { name, price };
+    await userExist.bills.push(newBill);
+    await userExist.save();
+    return res.status(200).json({ msg: "New bill added successfully" });
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
 const showBills = async (req, res) => {
