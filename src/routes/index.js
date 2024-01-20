@@ -23,5 +23,5 @@ router.put("/newIncomeBills", newIncomeBills);
 router.put("/newIncomeTickets", newIncomeTickets);
 router.put("/newBill", newBills);
 router.get("/showBills/:name", showBills);
-router.delete("/deleteOneBill/:userName", deleteOneBill);
+router.put("/deleteOneBill/:userName", deleteOneBill);
 module.exports = router;
