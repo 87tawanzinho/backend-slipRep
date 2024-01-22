@@ -111,7 +111,7 @@ const paidBillOrNo = async (req, res) => {
   const { name } = req.params;
   const { id } = req.body;
   try {
-    const userExist = UserModel.findOne({ name: name });
+    const userExist = await UserModel.findOne({ name: name });
     if (!userExist) {
       return res.status(404).json("User not found.");
     }
