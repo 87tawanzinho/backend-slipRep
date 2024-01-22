@@ -6,6 +6,7 @@ const {
   showSlips,
   newSlips,
   paidBillOrNo,
+  deleteOneSlip,
 } = require("../controllers/ticketsAndBills");
 const {
   userCreate,
