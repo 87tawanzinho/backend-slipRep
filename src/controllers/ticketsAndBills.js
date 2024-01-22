@@ -89,4 +89,5 @@ module.exports = {
   showBillById,
   deleteOneBill,
   showSlips,
+  newSlips,
 };
