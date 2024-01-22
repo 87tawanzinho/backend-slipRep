@@ -83,11 +83,36 @@ const deleteOneBill = async (req, res) => {
   }
 };
 
+const deleteOneSlip = async (req, res) => {
+  const { userName } = req.params;
+  const { id } = req.body;
+
+  try {
+    const userExist = await UserModel.findOne({ name: userName });
+
+    if (!userExist) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    userExist.tickets = userExist.tickets.filter(
+      (slip) => slip._id.toString() !== id
+    );
+
+    await userExist.save();
+
+    return res.status(200).json({ tickets: userExist.tickets });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 module.exports = {
   newBills,
   showBills,
   showBillById,
   deleteOneBill,
+  deleteOneSlip,
   showSlips,
   newSlips,
 };

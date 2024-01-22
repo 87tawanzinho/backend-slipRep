@@ -30,4 +30,5 @@ router.get("/showBills/:name", showBills);
 router.get("/showSlips/:name", showSlips);
 router.get("/showBillById/:name/:id", showBillById);
 router.put("/deleteOneBill/:userName", deleteOneBill);
+router.put("/deleteOneSlip/:userName", deleteOneSlip);
 module.exports = router;
