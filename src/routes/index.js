@@ -5,6 +5,7 @@ const {
   showBillById,
   showSlips,
   newSlips,
+  paidBillOrNo,
 } = require("../controllers/ticketsAndBills");
 const {
   userCreate,
@@ -30,4 +31,5 @@ router.get("/showBills/:name", showBills);
 router.get("/showSlips/:name", showSlips);
 router.get("/showBillById/:name/:id", showBillById);
 router.put("/deleteOneBill/:userName", deleteOneBill);
+router.put("/paidBillOrNo/:userName", paidBillOrNo);
 module.exports = router;

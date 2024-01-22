@@ -17,6 +17,10 @@ const userSchema = new Schema({
       price: Number,
       date: String,
       observation: String,
+      paid: {
+        type: Boolean,
+        default: false,
+      },
     },
   ],
 
