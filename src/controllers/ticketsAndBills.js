@@ -83,7 +83,11 @@ const deleteOneBill = async (req, res) => {
   }
 };
 
+<<<<<<< HEAD
 const deleteOneSlip = async (req, res) => {
+=======
+const paidBillOrNo = async (req, res) => {
+>>>>>>> 57dfda44e03d45318d8615f77f6ba06b8ee6dcaf
   const { userName } = req.params;
   const { id } = req.body;
 
@@ -94,6 +98,7 @@ const deleteOneSlip = async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
 
+<<<<<<< HEAD
     userExist.tickets = userExist.tickets.filter(
       (slip) => slip._id.toString() !== id
     );
@@ -104,6 +109,24 @@ const deleteOneSlip = async (req, res) => {
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: "Internal Server Error" });
+=======
+    const billStatusChange = userExist.bills.find(
+      (bill) => bill._id.toString() === id
+    );
+
+    if (!billStatusChange) {
+      return res.status(404).json({ error: "Bill not found" });
+    }
+
+    billStatusChange.paid = !billStatusChange.paid;
+
+    await userExist.save();
+
+    return res.status(200).json({ bills: userExist.bills });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: error });
+>>>>>>> 57dfda44e03d45318d8615f77f6ba06b8ee6dcaf
   }
 };
 
@@ -115,4 +138,5 @@ module.exports = {
   deleteOneSlip,
   showSlips,
   newSlips,
+  paidBillOrNo,
 };
