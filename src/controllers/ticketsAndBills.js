@@ -94,7 +94,13 @@ const paidBillOrNo = async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    const billStatusChange = userExist.bills.find((bill) => bill._id === id);
+    const billStatusChange = userExist.bills.find(
+      (bill) => bill._id.toString() === id
+    );
+
+    if (!billStatusChange) {
+      return res.status(404).json({ error: "Bill not found" });
+    }
 
     billStatusChange.paid = !billStatusChange.paid;
 
@@ -103,7 +109,7 @@ const paidBillOrNo = async (req, res) => {
     return res.status(200).json({ bills: userExist.bills });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: "Internal Server Error" });
+    return res.status(500).json({ error: error });
   }
 };
 
