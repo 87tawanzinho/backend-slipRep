@@ -7,6 +7,7 @@ const {
   newSlips,
   paidBillOrNo,
   deleteOneSlip,
+  paidSlipOrNo,
 } = require("../controllers/ticketsAndBills");
 const {
   userCreate,

@@ -174,4 +174,5 @@ module.exports = {
   showSlips,
   newSlips,
   paidBillOrNo,
+  paidSlipOrNo,
 };
