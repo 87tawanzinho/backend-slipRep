@@ -30,6 +30,10 @@ const userSchema = new Schema({
       code: String,
       date: String,
       price: Number,
+      paid: {
+        type: Boolean,
+        default: false,
+      },
     },
   ],
 });

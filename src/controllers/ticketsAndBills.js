@@ -136,6 +136,35 @@ const paidBillOrNo = async (req, res) => {
   }
 };
 
+const paidSlipOrNo = async (req, res) => {
+  const { name } = req.params;
+  const { id } = req.body;
+  try {
+    const userExist = await UserModel.findOne({ name: name });
+
+    if (!userExist) {
+      return res.status(404).json("User not found.");
+    }
+
+    const ticketStatusChange = userExist.tickets.find(
+      (ticket) => ticket._id.toString() === id
+    );
+
+    if (!ticketStatusChange) {
+      return res.status(404).json({ error: "ticket not found" });
+    }
+
+    ticketStatusChange.paid = !ticketStatusChange.paid;
+
+    await userExist.save();
+
+    return res.status(200).json({ tickets: userExist.tickets });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: error });
+  }
+};
+
 module.exports = {
   newBills,
   showBills,

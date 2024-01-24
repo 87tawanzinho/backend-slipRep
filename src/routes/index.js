@@ -29,9 +29,11 @@ router.put("/newIncomeTickets", newIncomeTickets);
 router.put("/newBill", newBills);
 router.put("/newSlip", newSlips);
 router.get("/showBills/:name", showBills);
+
 router.get("/showSlips/:name", showSlips);
 router.get("/showBillById/:name/:id", showBillById);
 router.put("/deleteOneBill/:userName", deleteOneBill);
 router.put("/deleteOneSlip/:userName", deleteOneSlip);
 router.put("/paidBillOrNo/:name", paidBillOrNo);
+router.put("/paidSlipOrNo/:name", paidSlipOrNo);
 module.exports = router;
