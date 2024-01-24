@@ -5,8 +5,7 @@ const userCreate = async (req, res) => {
   const { name, password, email } = req.body;
   if (!name || !password || !email) {
     return res.status(400).json({
-      message:
-        "Certifique-se de preencher e-mail, senha e seu nome de usuário.",
+      message: "Preencha todos os dados.",
     });
   }
 
