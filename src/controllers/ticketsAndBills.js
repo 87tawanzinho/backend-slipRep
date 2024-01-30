@@ -9,7 +9,6 @@ const newBills = async (req, res) => {
     const newBill = { name, price, date, observation };
     await userExist.bills.push(newBill);
     await userExist.save();
-    await userExist.generateMonthlyReportIfNeeded();
     return res.status(200).json({ msg: "New bill added successfully" });
   } catch (error) {
     return res.status(500).json({ msg: "Something wrong " + error });
