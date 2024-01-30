@@ -20,9 +20,18 @@ const userSchema = new Schema({
         type: Boolean,
         default: false,
       },
-      interest: Number,
-      datePayment: String,
-      totalPriceWithInterest: Number,
+      interest: {
+        type: Number,
+        default: 0,
+      },
+      datePayment: {
+        type: Number,
+        default: "Não Definida",
+      },
+      totalPriceWithInterest: {
+        type: Number,
+        default: 0,
+      },
     },
   ],
 
