@@ -135,7 +135,7 @@ const paidBillOrNo = async (req, res) => {
     } else {
       billChange.datePayment = "Não definida";
       billChange.totalPriceWithInterest = 0;
-      billChange.interest = null;
+      billChange.interest = 0;
     }
     await userExist.save();
 
