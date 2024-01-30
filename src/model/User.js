@@ -25,7 +25,7 @@ const userSchema = new Schema({
         default: 0,
       },
       datePayment: {
-        type: Number,
+        type: String,
         default: "Não Definida",
       },
       totalPriceWithInterest: {

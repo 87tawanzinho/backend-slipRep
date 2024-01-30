@@ -7,7 +7,7 @@ const newBills = async (req, res) => {
   try {
     const userExist = await UserModel.findOne({ name: userName });
     const newBill = { name, price, date, observation };
-    await userExist.bills.push(newBill);
+    userExist.bills.push(newBill);
     await userExist.save();
     return res.status(200).json({ msg: "New bill added successfully" });
   } catch (error) {
