@@ -129,8 +129,9 @@ const paidBillOrNo = async (req, res) => {
     billChange.paid = !billChange.paid;
     if (billChange.paid === true) {
       billChange.datePayment = date;
-      billChange.totalPriceWithInterest = billChange.price + interest;
       billChange.interest = interest;
+      billChange.totalPriceWithInterest =
+        billChange.price + billChange.interest;
     } else {
       billChange.datePayment = "Não definida";
       billChange.totalPriceWithInterest = 0;
