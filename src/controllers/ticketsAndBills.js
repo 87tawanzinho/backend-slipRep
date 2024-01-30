@@ -129,7 +129,7 @@ const paidBillOrNo = async (req, res) => {
     billChange.paid = !billChange.paid;
     if (billChange.paid === true) {
       billChange.datePayment = date;
-      billChange.interest = interest;
+      billChange.interest = interest >= 0 ? interest : 0;
       billChange.totalPriceWithInterest =
         billChange.price + billChange.interest;
     } else {
