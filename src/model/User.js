@@ -30,7 +30,7 @@ const userSchema = new Schema({
       },
       totalPriceWithInterest: {
         type: Number,
-        default: 0,
+        default: price,
       },
     },
   ],
