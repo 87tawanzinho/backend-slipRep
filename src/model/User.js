@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
-
+const cron = require("node-cron"); // Make sure to import the cron library
 const { Schema } = mongoose;
-
 const userSchema = new Schema({
   name: String,
   email: String,
@@ -21,6 +20,9 @@ const userSchema = new Schema({
         type: Boolean,
         default: false,
       },
+      interest: Number,
+      datePayment: String,
+      totalPriceWithInterest: Number,
     },
   ],
 

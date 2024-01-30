@@ -9,6 +9,7 @@ const newBills = async (req, res) => {
     const newBill = { name, price, date, observation };
     await userExist.bills.push(newBill);
     await userExist.save();
+    await userExist.generateMonthlyReportIfNeeded();
     return res.status(200).json({ msg: "New bill added successfully" });
   } catch (error) {
     return res.status(500).json({ msg: "Something wrong " + error });
@@ -109,7 +110,8 @@ const deleteOneSlip = async (req, res) => {
 
 const paidBillOrNo = async (req, res) => {
   const { name } = req.params;
-  const { id } = req.body;
+  const { id, interest, date } = req.body;
+
   try {
     const userExist = await UserModel.findOne({ name: name });
 
@@ -117,16 +119,24 @@ const paidBillOrNo = async (req, res) => {
       return res.status(404).json("User not found.");
     }
 
-    const billStatusChange = userExist.bills.find(
+    const billChange = userExist.bills.find(
       (bill) => bill._id.toString() === id
     );
 
-    if (!billStatusChange) {
+    if (!billChange) {
       return res.status(404).json({ error: "Bill not found" });
     }
 
-    billStatusChange.paid = !billStatusChange.paid;
-
+    billChange.paid = !billChange.paid;
+    if (billChange.paid === true) {
+      billChange.datePayment = date;
+      billChange.totalPriceWithInterest = billChange.price + interest;
+      billChange.interest = interest;
+    } else {
+      billChange.datePayment = null;
+      billChange.totalPriceWithInterest = null;
+      billChange.interest = null;
+    }
     await userExist.save();
 
     return res.status(200).json({ bills: userExist.bills });
