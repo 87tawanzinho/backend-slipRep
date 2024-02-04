@@ -8,6 +8,7 @@ const {
   paidBillOrNo,
   deleteOneSlip,
   paidSlipOrNo,
+  changeNameOfBill,
 } = require("../controllers/ticketsAndBills");
 const {
   userCreate,
@@ -37,4 +38,5 @@ router.put("/deleteOneBill/:userName", deleteOneBill);
 router.put("/deleteOneSlip/:userName", deleteOneSlip);
 router.put("/paidBillOrNo/:name", paidBillOrNo);
 router.put("/paidSlipOrNo/:name", paidSlipOrNo);
+router.put("/updateNameOfBill/", changeNameOfBill);
 module.exports = router;

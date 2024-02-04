@@ -1,5 +1,4 @@
 const UserModel = require("../model/User");
-const bcrypt = require("bcrypt");
 
 const newBills = async (req, res) => {
   const { userName, name, price, date, observation } = req.body;
@@ -107,6 +106,32 @@ const deleteOneSlip = async (req, res) => {
   }
 };
 
+const changeNameOfBill = async (req, res) => {
+  const { userName, id, name } = req.body;
+
+  try {
+    const userExist = await UserModel.findOne({ name: userName });
+
+    if (!userExist) {
+      return res.status(400).json("User not exist.");
+    }
+
+    const thisBill = userExist.bills.find((bill) => {
+      bill._id.toString() === id;
+    });
+
+    if (!thisBill) {
+      return res.status(400).json("This bill doesn't exist.");
+    }
+
+    thisBill.name = name;
+
+    return res.status(201).json("Updated. " + name);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
 const paidBillOrNo = async (req, res) => {
   const { name } = req.params;
   const { id, interest, date } = req.body;
@@ -185,4 +210,5 @@ module.exports = {
   newSlips,
   paidBillOrNo,
   paidSlipOrNo,
+  changeNameOfBill,
 };
