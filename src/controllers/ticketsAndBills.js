@@ -126,6 +126,8 @@ const changeNameOfBill = async (req, res) => {
 
     thisBill.name = name;
 
+    await userExist.save();
+
     return res.status(201).json("Updated. " + name);
   } catch (err) {
     res.status(500).json(err);
