@@ -116,9 +116,7 @@ const changeNameOfBill = async (req, res) => {
       return res.status(400).json("User not exist.");
     }
 
-    const thisBill = userExist.bills.find((bill) => {
-      bill._id.toString() === id;
-    });
+    const thisBill = userExist.bills.find((bill) => bill._id.toString() === id);
 
     if (!thisBill) {
       return res.status(400).json("This bill doesn't exist.");
