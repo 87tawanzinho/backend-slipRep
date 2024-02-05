@@ -32,6 +32,10 @@ const userSchema = new Schema({
         type: Number,
         default: 0,
       },
+      paymentMethod: {
+        type: String,
+        default: "Não definido.",
+      },
     },
   ],
 

@@ -134,7 +134,7 @@ const changeNameOfBill = async (req, res) => {
 
 const paidBillOrNo = async (req, res) => {
   const { name } = req.params;
-  const { id, interest, date } = req.body;
+  const { id, interest, date, paymentMethod } = req.body;
 
   try {
     const userExist = await UserModel.findOne({ name: name });
@@ -157,10 +157,12 @@ const paidBillOrNo = async (req, res) => {
       billChange.interest = interest >= 0 ? interest : 0;
       billChange.totalPriceWithInterest =
         billChange.price + billChange.interest;
+      billChange.paymentMethod = paymentMethod;
     } else {
       billChange.datePayment = "Não definida";
       billChange.totalPriceWithInterest = 0;
       billChange.interest = 0;
+      billChange.paymentMethod = "Não definido";
     }
     await userExist.save();
 
