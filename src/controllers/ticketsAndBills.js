@@ -132,6 +132,37 @@ const changeNameOfBill = async (req, res) => {
   }
 };
 
+const getMonthlyExpenses = async (req, res) => {
+  const { name } = req.params;
+
+  const currentDate = new Date();
+  const startOfMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    1
+  );
+  const endOfMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth() + 1,
+    0
+  );
+
+  const userExist = await UserModel.findOne({ name: name });
+  if (!userExist) {
+    return res.status(404).json("User not found");
+  }
+
+  try {
+    const MonthlyExpenses = userExist.bills.filter(
+      (bill) => bill.created_at >= startOfMonth && bill.created_at <= endOfMonth
+    );
+
+    return res.status(200).json(MonthlyExpenses);
+  } catch (error) {
+    return res.status(500).json("Erro" + error);
+  }
+};
+
 const paidBillOrNo = async (req, res) => {
   const { name } = req.params;
   const { id, interest, date, paymentMethod } = req.body;
@@ -213,4 +244,5 @@ module.exports = {
   paidBillOrNo,
   paidSlipOrNo,
   changeNameOfBill,
+  getMonthlyExpenses,
 };

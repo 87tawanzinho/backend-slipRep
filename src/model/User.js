@@ -36,6 +36,10 @@ const userSchema = new Schema({
         type: String,
         default: "Não definido.",
       },
+      created_at: {
+        type: Date,
+        default: Date.now(),
+      },
     },
   ],
 

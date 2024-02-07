@@ -9,6 +9,7 @@ const {
   deleteOneSlip,
   paidSlipOrNo,
   changeNameOfBill,
+  getMonthlyExpenses,
 } = require("../controllers/ticketsAndBills");
 const {
   userCreate,
@@ -31,7 +32,7 @@ router.put("/newIncomeTickets", newIncomeTickets);
 router.put("/newBill", newBills);
 router.put("/newSlip", newSlips);
 router.get("/showBills/:name", showBills);
-
+router.get("/showBillsByMonthly/:name", getMonthlyExpenses);
 router.get("/showSlips/:name", showSlips);
 router.get("/showBillById/:name/:id", showBillById);
 router.put("/deleteOneBill/:userName", deleteOneBill);
@@ -39,4 +40,5 @@ router.put("/deleteOneSlip/:userName", deleteOneSlip);
 router.put("/paidBillOrNo/:name", paidBillOrNo);
 router.put("/paidSlipOrNo/:name", paidSlipOrNo);
 router.put("/updateNameOfBill/", changeNameOfBill);
+
 module.exports = router;
