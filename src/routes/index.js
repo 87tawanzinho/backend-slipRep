@@ -10,6 +10,7 @@ const {
   paidSlipOrNo,
   changeNameOfBill,
   getMonthlyExpenses,
+  getMonthlyExpensesByFilter,
 } = require("../controllers/ticketsAndBills");
 const {
   userCreate,
@@ -40,5 +41,7 @@ router.put("/deleteOneSlip/:userName", deleteOneSlip);
 router.put("/paidBillOrNo/:name", paidBillOrNo);
 router.put("/paidSlipOrNo/:name", paidSlipOrNo);
 router.put("/updateNameOfBill/", changeNameOfBill);
+
+router.get("/showBillsByFilter/:name/:month/:year", getMonthlyExpensesByFilter);
 
 module.exports = router;

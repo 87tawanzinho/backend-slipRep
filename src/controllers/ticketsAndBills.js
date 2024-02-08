@@ -162,6 +162,29 @@ const getMonthlyExpenses = async (req, res) => {
     return res.status(500).json("Erro" + error);
   }
 };
+const getMonthlyExpensesByFilter = async (req, res) => {
+  const { name, month, year } = req.params;
+
+  const monthNumber = new Date(Date.parse(month + " 1, " + year)).getMonth();
+
+  const startOfMonth = new Date(year, monthNumber, 1);
+  const endOfMonth = new Date(year, monthNumber + 1, 0);
+
+  const userExist = await UserModel.findOne({ name: name });
+  if (!userExist) {
+    return res.status(404).json("Usuário não encontrado");
+  }
+
+  try {
+    const MonthlyExpenses = userExist.bills.filter(
+      (bill) => bill.created_at >= startOfMonth && bill.created_at <= endOfMonth
+    );
+
+    return res.status(200).json(MonthlyExpenses);
+  } catch (error) {
+    return res.status(500).json("Erro: " + error);
+  }
+};
 
 const paidBillOrNo = async (req, res) => {
   const { name } = req.params;
@@ -245,4 +268,5 @@ module.exports = {
   paidSlipOrNo,
   changeNameOfBill,
   getMonthlyExpenses,
+  getMonthlyExpensesByFilter,
 };
